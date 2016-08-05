@@ -6,6 +6,8 @@ const postsReducer = (state = { all: [], post: null }, action) => {
       return { all: action.payload, post: state.post };
     case ActionTypes.FETCH_POST:
       return { all: state.all, post: action.payload };
+    // case ActionTypes.UPDATE_POST:
+    //   return { all: state.all, post: action.payload };
     default:
       return state;
   }

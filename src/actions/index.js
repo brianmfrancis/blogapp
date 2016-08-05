@@ -40,6 +40,7 @@ export function createPost(post) {
   return (dispatch) => {
     axios.post(`${ROOT_URL}/posts/${API_KEY}`, post).then(response => {
       dispatch({ type: 'CREATE_POST', payload: response.data });
+      console.log(response.data);
       browserHistory.push('/');
     }).catch(error => {
      // hit an error do something else!
