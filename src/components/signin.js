@@ -1,9 +1,9 @@
-import React from 'react';
-import { signinUser } from '../actions';
+import React, { Component } from 'react';
+import * as actions from '../actions';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 
-class SignIn extends React.Component {
+
+class SignIn extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,7 +14,6 @@ class SignIn extends React.Component {
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onSignin = this.onSignin.bind(this);
-    this.onCancel = this.onCancel.bind(this);
   }
 
   onUsernameChange(ev) {
@@ -31,10 +30,6 @@ class SignIn extends React.Component {
 
   onSignin() {
     this.props.signinUser({ email: this.state.username, password: this.state.password });
-  }
-
-  onCancel() {
-    browserHistory.push('/');
   }
 
   render() {
@@ -55,4 +50,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default connect(null, { signinUser })(SignIn);
+export default connect(null, actions)(SignIn);
