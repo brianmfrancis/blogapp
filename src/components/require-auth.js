@@ -13,7 +13,9 @@ export default function (ComposedComponent) {
     }
 
     componentWillUpdate(nextProps) {
-
+      if (!nextProps.authenticated) {
+        browserHistory.push('/');
+      }
     }
 
     render() {

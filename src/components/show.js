@@ -89,12 +89,18 @@ class Show extends Component {
         </form>
       );
     } else {
+      let author;
+      if (this.props.post.author === undefined || this.props.post.author.username === undefined) {
+        author = 'Author: ';
+      } else {
+        author = `Author: ${this.props.post.author.username}`;
+      }
       return (
         <div>
           <div>
             <div id="title">
               {this.props.post.title}
-              <button id="deletebutton" type="button" onClick={() => { this.props.deletePost(this.props.params.id); }}>
+              <button id="deletebutton" type="button" onClick={() => { this.props.deletePost(this.props.params.id, { title: this.state.title, tags: this.state.tags, content: this.state.content }); }}>
                 Delete
               </button>
             </div>
@@ -107,6 +113,9 @@ class Show extends Component {
             <p id="content">
               {this.props.post.content}
             </p>
+            <div>
+              {author}
+            </div>
           </div>
         </div>
 

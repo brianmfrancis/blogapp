@@ -13,7 +13,8 @@ export const ActionTypes = {
 };
 
 // const ROOT_URL = 'http://localhost:9090/api';
-const ROOT_URL = 'http://bfcs52-blog-part2.herokuapp.com/api';
+// const ROOT_URL = 'http://bfcs52-blog-part2.herokuapp.com/api';
+const ROOT_URL = 'http://blogapp-part3.herokuapp.com/api';
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
 const API_KEY = '';
 
@@ -67,9 +68,10 @@ export function updatePost(id, post) {
 }
 
 
-export function deletePost(id) {
+export function deletePost(id, post) {
+  console.log('here');
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts/${id}${API_KEY}`, { headers: { authorization: localStorage.getItem('token') } })
+    axios.post(`${ROOT_URL}/posts/${id}${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       dispatch({ type: 'DELETE_POST', payload: response.data });
       browserHistory.push('/');
@@ -109,7 +111,7 @@ export function signinUser({ email, password }) {
   };
 }
 
-export function signupUser({ email, password }) {
+export function signupUser({ email, password, username }) {
   // takes in an object with email and password (minimal user object)
   // returns a thunk method that takes dispatch as an argument (just like our create post method really)
   // does an axios.post on the /signup endpoint (only difference from above)
@@ -119,11 +121,13 @@ export function signupUser({ email, password }) {
   // on error should dispatch(authError(`Sign Up Failed: ${error.response.data}`));
 
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/signup`, { email, password }).then(response => {
+    axios.post(`${ROOT_URL}/signup`, { email, password, username }).then(response => {
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
       browserHistory.push('/');
+      console.log('signup true');
     }).catch(error => {
+      console.log('false');
       dispatch(authError(`Sign Up Failed: ${error.response.data}`));
     });
   };

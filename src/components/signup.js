@@ -6,29 +6,34 @@ class SignUp extends Component {
   constructor() {
     super();
     this.state = {
-      username: '',
+      email: '',
       password: '',
+      username: '',
     };
 
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
-    this.onSignin = this.onSignin.bind(this);
+    this.onSignup = this.onSignup.bind(this);
   }
 
-  onUsernameChange(ev) {
+  onUsernameChange(event) {
     this.setState({
-      username: ev.target.value,
+      email: event.target.value,
     });
   }
 
-  onPasswordChange(ev) {
+  onPasswordChange(event) {
     this.setState({
-      password: ev.target.value,
+      password: event.target.value,
     });
   }
 
-  onSignup() {
-    this.props.signupUser({ email: this.state.username, password: this.state.password });
+  onSignup(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    console.log(this.state);
+    console.log('on submit');
+    this.props.signupUser({ email: this.state.email, password: this.state.password, username: this.state.email });
   }
 
 
@@ -36,13 +41,13 @@ class SignUp extends Component {
     return (
       <div className="newpost">
         <h3>
-          Sign In
+          Sign Up
         </h3>
         <div>
           <form>
-            <input onChange={this.onTitleChange} placeholder="username" value={this.state.username} />
-            <input onChange={this.onContentChange} placeholder="password" value={this.state.password} />
-            <input type="submit" value="Submit" id="submit" onClick={this.onSubmit} />
+            <input onChange={this.onUsernameChange} placeholder="username" value={this.state.email} />
+            <input onChange={this.onPasswordChange} placeholder="password" value={this.state.password} />
+            <input type="submit" value="Submit" id="submit" onClick={this.onSignup} />
           </form>
         </div>
       </div>

@@ -15,10 +15,21 @@ class Index extends Component { /* stuff */
     this.props.fetchposts();
   }
 
+  // loadAuthor(post) {
+  //   if (post.username === undefined) {
+  //     // author = '';
+  //     return 'Author: ';
+  //   } else {
+  //     return `Author: ${post.username}`;
+  //   }
+  // }
+
   render() {
     return (
       <div>
         {this.props.posts.map(post => {
+          // const author = this.loadAuthor(post);
+          // console.log(post);
           return (
             <li id="postlist" key={post.id}>
               <Link to={`/posts/${post.id}`}>

@@ -12,24 +12,31 @@ class Navbar extends Component {
     this.state = {};
   }
   render() {
-    return (
-      <div id="nav">
-        <Link to="/">Blog Franchise</Link>
-        <Link to="/posts/new">New Post</Link>
-         if (state.auth.authenticated) {
-           <button id="deletebutton" type="button" onClick={this.props.signoutUser}>
-            Sign Out
-           </button>
-        }else {
+    if (this.props.authenticated) {
+      return (
+        <div id="nav">
+          <Link to="/">Blog Franchise</Link>
+          <Link to="/posts/new">New Post</Link>
+          <button id="deletebutton" type="button" onClick={this.props.signoutUser}>
+          Sign Out
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div id="nav">
+          <Link to="/">Blog Franchise</Link>
+          <Link to="/posts/new">New Post</Link>
           <div>
-            <Link to="/signin"> <div className="auth-button">Sign In</div> </Link>
-            <Link to="/signup"> <div className="auth-button white">Sign Up</div> </Link>
+            <Link to="/signin">Sign In</Link>
+            <Link to="/signup">Sign Up</Link>
           </div>
-        }
-      </div>
-    );
+        </div>
+      );
+    }
   }
 }
+
 
 const mapStateToProps = (state) => (
   {

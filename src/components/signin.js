@@ -16,19 +16,21 @@ class SignIn extends Component {
     this.onSignin = this.onSignin.bind(this);
   }
 
-  onUsernameChange(ev) {
+  onUsernameChange(event) {
     this.setState({
-      username: ev.target.value,
+      username: event.target.value,
     });
   }
 
-  onPasswordChange(ev) {
+  onPasswordChange(event) {
     this.setState({
-      password: ev.target.value,
+      password: event.target.value,
     });
   }
 
-  onSignin() {
+  onSignin(event) {
+    event.stopPropagation();
+    event.preventDefault();
     this.props.signinUser({ email: this.state.username, password: this.state.password });
   }
 
@@ -40,9 +42,9 @@ class SignIn extends Component {
         </h3>
         <div>
           <form>
-            <input onChange={this.onTitleChange} placeholder="username" value={this.state.username} />
-            <input onChange={this.onContentChange} placeholder="password" value={this.state.password} />
-            <input type="submit" value="Submit" id="submit" onClick={this.onSubmit} />
+            <input onChange={this.onUsernameChange} placeholder="username" value={this.state.username} />
+            <input onChange={this.onPasswordChange} placeholder="password" value={this.state.password} />
+            <input type="submit" value="Submit" id="submit" onClick={this.onSignin} />
           </form>
         </div>
       </div>
